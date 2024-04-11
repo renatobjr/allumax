@@ -1,5 +1,7 @@
 package br.com.allumax.api.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,15 +9,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "permissions")
-public class PermissionEntity {
+@Table(name = "roles")
+public class RolesEntity implements GrantedAuthority {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private String permission;
+  private String role;
 
-  public PermissionEntity() {
+  public RolesEntity() {
+  }
+
+  @Override
+  public String getAuthority() {
+    return this.role.toUpperCase();
   }
 
   public Integer getId() {
@@ -26,12 +33,12 @@ public class PermissionEntity {
     this.id = id;
   }
 
-  public String getPermission() {
-    return permission;
+  public String getrole() {
+    return role;
   }
 
-  public void setPermission(String permission) {
-    this.permission = permission;
+  public void setrole(String role) {
+    this.role = role;
   }
 
   @Override
@@ -39,7 +46,7 @@ public class PermissionEntity {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((permission == null) ? 0 : permission.hashCode());
+    result = prime * result + ((role == null) ? 0 : role.hashCode());
     return result;
   }
 
@@ -51,16 +58,16 @@ public class PermissionEntity {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    PermissionEntity other = (PermissionEntity) obj;
+    RolesEntity other = (RolesEntity) obj;
     if (id == null) {
       if (other.id != null)
         return false;
     } else if (!id.equals(other.id))
       return false;
-    if (permission == null) {
-      if (other.permission != null)
+    if (role == null) {
+      if (other.role != null)
         return false;
-    } else if (!permission.equals(other.permission))
+    } else if (!role.equals(other.role))
       return false;
     return true;
   }

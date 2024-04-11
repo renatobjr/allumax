@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `profiles` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `fullname` VARCHAR(255) NULL,
   `phone` VARCHAR(45) NULL,

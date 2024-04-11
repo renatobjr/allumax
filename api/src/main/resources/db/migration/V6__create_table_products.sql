@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `products` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `category_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   `description` VARCHAR(255) NULL,

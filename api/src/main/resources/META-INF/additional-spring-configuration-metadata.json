@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "security.token.issuer",
+    "type": "java.lang.String",
+    "description": "A unique identifier for the token issuer. This value is used to identify the issuer of the token when validating the token. The value must be unique for each token issuer. The value must be a string and cannot be null or empty."
+  },
+  {
+    "name": "security.token.secret",
+    "type": "java.lang.String",
+    "description": "The secret used to sign the token. The value must be a string and cannot be null or empty."
+  }
+]}
