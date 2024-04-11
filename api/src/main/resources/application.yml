@@ -1,0 +1,16 @@
+server:
+  port: 3000
+spring:
+  application:
+    name: api
+  datasource:
+    url: jdbc:mysql://localhost:3306/allumax-db?useSSL=false&useTimezone=true&&serverTimezone=UTC
+    username: antimonitor
+    password: monitor
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    locations: classpath:db/migration
+
