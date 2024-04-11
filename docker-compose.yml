@@ -1,0 +1,51 @@
+version: '3'
+services:
+  # allumax-db:
+  #   image: mariadb:11.3.2-jammy
+  #   container_name: allumax-db
+  #   volumes:
+  #     - ./start-sql:/docker-entrypoint-initdb.d
+  #     - allumax-db_data:/var/lib/mysql
+  #   ports:
+  #     - "3306:3306"
+  #   expose:
+  #     - 3306
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+  #     - MYSQL_DATABASE=auth
+  #     - MYSQL_USER=docker
+  #     - MYSQL_PASSWORD=docker
+  #   networks:
+  #     - allumax-net
+
+  allumax-api:
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    working_dir: /api
+    image: allumax-api
+    container_name: allumax-api
+    restart: on-failure
+    command: 
+      - mvn spring-boot:run
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    # depends_on:
+    #   - allumax-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://allumax-db:3306/auth
+      - SPRING_DATASOURCE_USERNAME=docker
+      - SPRING_DATASOURCE_PASSWORD=docker
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+    networks:
+      - allumax-net
+
+networks:
+  allumax-net:
+    driver: bridge
+
+# volumes:
+#   allumax-db_data:
+#     driver: local
